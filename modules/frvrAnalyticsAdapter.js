@@ -1,6 +1,6 @@
 import adapter from '../libraries/analyticsAdapter/AnalyticsAdapter.js';
 import adapterManager from '../src/adapterManager.js';
-import CONSTANTS from '../src/constants.json';
+import { EVENTS } from '../src/constants.js';
 import {logInfo} from '../src/utils.js';
 
 const analyticsType = 'endpoint';
@@ -213,10 +213,10 @@ function mapBids(bids) {
 let frvrAdapter = Object.assign(adapter({analyticsType}), {
   track({eventType, args}) {
     switch (eventType) {
-      case CONSTANTS.EVENTS.AUCTION_END:
+      case EVENTS.AUCTION_END:
         handleAuctionEnd(args);
         break;
-      case CONSTANTS.EVENTS.BID_WON:
+      case EVENTS.BID_WON:
         handleBidWon(args);
         break;
       default:

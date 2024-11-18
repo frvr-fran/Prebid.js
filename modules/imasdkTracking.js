@@ -4,10 +4,7 @@ import { auctionManager } from '../src/auctionManager.js';
 import { INSTREAM } from '../src/video.js';
 import * as events from '../src/events.js';
 import { getGlobal } from '../src/prebidGlobal.js';
-import CONSTANTS from '../src/constants.json'
-
-const {BID_WON, AUCTION_END} = CONSTANTS.EVENTS;
-const {RENDERED} = CONSTANTS.BID_STATUS;
+import { EVENTS, BID_STATUS } from '../src/constants.js'
 
 const IMASDK_TRACKING_DEFAULT_CONFIG = {
   enabled: false,
@@ -78,12 +75,12 @@ export function trackIMASDKDeliveredImpressions({adUnits, bidsReceived, bidderRe
     if (ads && ads.length) {
       for (var i = 0; i < ads.length; i++) {
         var ad = ads[i];
-        var bid = instreamBids.filter(e => matchBid(e, ad) && e.status !== RENDERED);
+        var bid = instreamBids.filter(e => matchBid(e, ad) && e.status !== BID_STATUS.RENDERED);
 
         if (bid && bid.length) {
-          bid[0].status = RENDERED;
+          bid[0].status = BID_STATUS.RENDERED;
           auctionManager.addWinningBid(bid[0]);
-          events.emit(BID_WON, bid[0]);
+          events.emit(EVENTS.BID_WON, bid[0]);
           getGlobal().markWinningBidAsUsed(bid[0]);
           ads.splice(i, 1);
         }
@@ -101,4 +98,4 @@ export function trackIMASDKDeliveredImpressions({adUnits, bidsReceived, bidderRe
   return true;
 }
 
-events.on(AUCTION_END, trackIMASDKDeliveredImpressions)
+events.on(EVENTS.AUCTION_END, trackIMASDKDeliveredImpressions)
