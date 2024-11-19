@@ -26,6 +26,7 @@ const converter = ortbConverter({
 });
 export const spec = {
   code: BIDDER_CODE,
+  aliases: ['algorix'],
   supportedMediaTypes: [BANNER],
 
   isBidRequestValid: function (bid) {
@@ -36,7 +37,7 @@ export const spec = {
     ) {
       SID = bid.params.sid;
       TOKEN = bid.params.token;
-      ENDPOINT = bid.params.endpoint + '?sid=' + SID + '&token=' + TOKEN;
+      ENDPOINT = 'https://xyz.svr-algorix.com/rtb/sa' + '?sid=' + SID + '&token=' + TOKEN;
       return true;
     }
     return false;
