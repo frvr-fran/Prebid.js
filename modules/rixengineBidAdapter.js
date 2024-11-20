@@ -31,7 +31,7 @@ export const spec = {
 
   isBidRequestValid: function (bid) {
     if (
-      Boolean(bid.params.endpoint) &&
+      // Boolean(bid.params.endpoint) &&
       Boolean(bid.params.sid) &&
       Boolean(bid.params.token)
     ) {
