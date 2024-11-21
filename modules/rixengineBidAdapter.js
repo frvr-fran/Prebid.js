@@ -31,13 +31,13 @@ export const spec = {
 
   isBidRequestValid: function (bid) {
     if (
-      // Boolean(bid.params.endpoint) &&
+      Boolean(bid.params.endpoint) &&
       Boolean(bid.params.sid) &&
       Boolean(bid.params.token)
     ) {
       SID = bid.params.sid;
       TOKEN = bid.params.token;
-      ENDPOINT = 'https://xyz.svr-algorix.com/rtb/sa' + '?sid=' + SID + '&token=' + TOKEN;
+      ENDPOINT = bid.params.endpoint + '?sid=' + SID + '&token=' + TOKEN;
       return true;
     }
     return false;
