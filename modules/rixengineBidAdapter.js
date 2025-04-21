@@ -26,6 +26,7 @@ const converter = ortbConverter({
 });
 export const spec = {
   code: BIDDER_CODE,
+  aliases: ['algorix'],
   supportedMediaTypes: [BANNER],
 
   isBidRequestValid: function (bid) {
